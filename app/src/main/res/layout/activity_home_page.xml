@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaperdemo"
+    tools:context=".HomePage">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textStyle="bold"
+        android:textSize="32dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:padding="12dp"
+        android:id="@+id/LoginText">
+    </TextView>
+
+    <EditText
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:hint="Email"
+        android:inputType="textWebEmailAddress"
+        android:id="@+id/EnterEmail"
+        android:layout_below="@id/LoginText"
+        android:layout_centerHorizontal="true">
+    </EditText>
+
+    <EditText
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:hint="Password"
+        android:inputType="textWebPassword"
+        android:id="@+id/EnterPass"
+        android:layout_below="@id/EnterEmail"
+        android:layout_centerHorizontal="true">
+    </EditText>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/EnterPass"
+        android:id="@+id/btnLogin"
+        android:layout_centerHorizontal="true"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:backgroundTint="#880E070A">
+    </Button>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLogin"
+        android:id="@+id/btnForPass"
+        android:layout_centerHorizontal="true"
+        android:text="Forgot Password !"
+        android:textColor="@color/white"
+        android:background="?attr/selectableItemBackground">
+    </Button>
+
+</RelativeLayout>

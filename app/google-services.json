@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "408177006628",
+    "firebase_url": "https://windowsassistance-4bb76-default-rtdb.firebaseio.com",
+    "project_id": "windowsassistance-4bb76",
+    "storage_bucket": "windowsassistance-4bb76.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408177006628:android:62ab9163b740753733a0b1",
+        "android_client_info": {
+          "package_name": "com.msfpiyush.admindatabasetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408177006628-hq05h0ub5ufu3ifvm70iha8mop99104o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw_CE5lcIUgADeTxMWVcodGXJUmgQgZwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408177006628-hq05h0ub5ufu3ifvm70iha8mop99104o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408177006628:android:210eed088ed5384133a0b1",
+        "android_client_info": {
+          "package_name": "com.msfpiyush.loginformdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408177006628-hq05h0ub5ufu3ifvm70iha8mop99104o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw_CE5lcIUgADeTxMWVcodGXJUmgQgZwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408177006628-hq05h0ub5ufu3ifvm70iha8mop99104o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
