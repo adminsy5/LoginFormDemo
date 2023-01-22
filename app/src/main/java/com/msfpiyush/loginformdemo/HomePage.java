@@ -81,7 +81,7 @@ FirebaseAuth firebaseAuth;
     }
 
     private void GotoCrud() {
-        Intent ig=new Intent(HomePage.this,CrudOpPerform.class);
+        Intent ig=new Intent(HomePage.this,InsertData.class);
         startActivity(ig);
     }
 }
