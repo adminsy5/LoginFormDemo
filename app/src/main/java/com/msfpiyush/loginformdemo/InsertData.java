@@ -19,16 +19,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.io.InputStream;
 
 public class InsertData extends AppCompatActivity {
     EditText EditName,EditCourse,EditEmail;
-    Button InsertButton,BrowseButton;
+    Button InsertButton,BrowseButton,ShowInsertData;
     ImageView UserImg;
     Uri filepath;
     Bitmap bitmap;
@@ -46,13 +47,14 @@ public class InsertData extends AppCompatActivity {
         EditName=findViewById(R.id.EditName);
         EditCourse=findViewById(R.id.EditCourse);
         EditEmail=findViewById(R.id.EditEmail);
+        ShowInsertData=findViewById(R.id.ShowInsertData);
         InsertButton=findViewById(R.id.InsertButton);
         BrowseButton=findViewById(R.id.BrowseButton);
 
         activityResultLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
-                if(result.getResultCode()==RESULT_OK && result.getData()!=null ) //l-->f and f-->l
+                if(result.getResultCode()==RESULT_OK && result.getData()!=null )
                 {
                         filepath = result.getData().getData();
                         try {
@@ -78,21 +80,43 @@ public class InsertData extends AppCompatActivity {
         InsertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                process();
                 uploadToFirebase();
             }
         });
+        ShowInsertData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent igx=new Intent(InsertData.this,CrudOpPerform.class);
+                startActivity(igx);            }
+        });
     }
+    private void process() {
+        String name=EditName.getText().toString().trim();
+        String course=EditCourse.getText().toString().trim();
+        String email=EditEmail.getText().toString().trim();
 
+        dataholder object=new dataholder(name,course,email);
+        FirebaseDatabase db=FirebaseDatabase.getInstance();
+        DatabaseReference node=db.getReference("Friend");
+
+        node.child(name).setValue(object);
+        EditName.setText("");
+        EditCourse.setText("");
+        EditEmail.setText("");
+
+        Toast.makeText(this, "Data Inserted !", Toast.LENGTH_SHORT).show();
+    }
     private void uploadToFirebase()
     {
         FirebaseStorage storage=FirebaseStorage.getInstance();
-        StorageReference uploader= storage.getReference().child("image1");
+        StorageReference uploader= storage.getReference().child("upload").child("demo.jpg");
         uploader.putFile(filepath)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>()
                 {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(InsertData.this, "File Uploaded", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(InsertData.this, "Hurray ! ❤️", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
