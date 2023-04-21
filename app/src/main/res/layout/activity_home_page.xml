@@ -4,62 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpaperdemo"
+    android:background="@color/md_theme_light_background"
     tools:context=".HomePage">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
         android:textStyle="bold"
-        android:textSize="32dp"
-        android:textColor="@color/black"
+        android:textSize="52sp"
+        android:textColor="@color/md_theme_light_primary"
         android:gravity="center"
         android:layout_centerHorizontal="true"
         android:padding="12dp"
+        android:layout_margin="32dp"
         android:id="@+id/LoginText">
-    </TextView>
+    </com.google.android.material.textview.MaterialTextView>
 
-    <EditText
-        android:layout_width="380dp"
-        android:layout_height="50dp"
-        android:hint="Email"
-        android:inputType="textWebEmailAddress"
-        android:id="@+id/EnterEmail"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/LoginText"
-        android:layout_centerHorizontal="true">
-    </EditText>
+        android:background="@drawable/bg_sign_in">
 
-    <EditText
-        android:layout_width="380dp"
-        android:layout_height="50dp"
-        android:hint="Password"
-        android:inputType="textWebPassword"
-        android:id="@+id/EnterPass"
-        android:layout_below="@id/EnterEmail"
-        android:layout_centerHorizontal="true">
-    </EditText>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Rlc1"
+            android:background="@drawable/bg_card"
+            android:layout_marginStart="22dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginTop="22dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:id="@+id/Email"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="22dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginTop="22dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebEmailAddress"
+                    android:id="@+id/EnterEmail"
+                    android:textColor="@color/md_theme_light_primary"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/EnterPass"
-        android:id="@+id/btnLogin"
-        android:layout_centerHorizontal="true"
-        android:text="Login"
-        android:textColor="@color/white"
-        android:backgroundTint="#880E070A">
-    </Button>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                android:id="@+id/Password"
+                android:layout_below="@id/Email"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="22dp"
+                android:layout_marginEnd="22dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_marginTop="5dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textWebPassword"
+                    android:id="@+id/EnterPass"
+                    android:textColor="@color/md_theme_light_primary"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnLogin"
-        android:id="@+id/btnForPass"
-        android:layout_centerHorizontal="true"
-        android:text="Forgot Password !"
-        android:textColor="@color/white"
-        android:background="?attr/selectableItemBackground">
-    </Button>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="62dp"
+                android:layout_below="@id/Password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="72dp"
+                android:layout_marginEnd="72dp"
+                android:backgroundTint="@color/md_theme_dark_onErrorContainer"
+                android:text="@string/sign_in"
+                android:textColor="@color/md_theme_light_primary"
+                android:textSize="19sp"
+                android:fontFamily="@font/b612"
+                app:cornerRadius="12dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="32dp"
+                app:rippleColor="@color/md_theme_light_inversePrimary">
+            </com.google.android.material.button.MaterialButton>
 
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnForPass"
+                android:layout_below="@id/btnLogin"
+                android:layout_centerHorizontal="true"
+                android:textStyle="normal"
+                android:textColor="@color/md_theme_light_primary"
+                android:textSize="17sp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="22dp"
+                android:text="@string/forgot_password">
+            </com.google.android.material.textview.MaterialTextView>
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

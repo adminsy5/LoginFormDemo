@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,70 +19,57 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.msfpiyush.loginformdemo.databinding.ActivityHomePageBinding;
+
+import java.util.Objects;
 
 public class HomePage extends AppCompatActivity {
-Button btnForPass,btnLogin;
-EditText EnterPass,EnterEmail;
+ActivityHomePageBinding binding;
 FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
-        btnLogin=findViewById(R.id.btnLogin);
-        EnterEmail=findViewById(R.id.EnterEmail);
-        EnterPass=findViewById(R.id.EnterPass);
-        firebaseAuth=FirebaseAuth.getInstance();
-        btnForPass=findViewById(R.id.btnForPass);
-
-        ActionBar ad=getSupportActionBar();
-        ColorDrawable cd=new ColorDrawable(Color.parseColor("#7F525D"));
-        ad.setBackgroundDrawable(cd);
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email=EnterEmail.getText().toString();
-                String password=EnterPass.getText().toString();
-
-                firebaseAuth.signInWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        Toast.makeText(HomePage.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                        GotoCrud();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(HomePage.this,e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-        btnForPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email=EnterEmail.getText().toString();
-                firebaseAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(HomePage.this, "Email Sent !", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(HomePage.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-            }
-        });
+        binding = ActivityHomePageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        firebaseAuth = FirebaseAuth.getInstance();
+           binding.btnLogin.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   if(isValidate()) {
+                       firebaseAuth.signInWithEmailAndPassword(Objects.requireNonNull(binding.EnterEmail.getText()).toString(), Objects.requireNonNull(binding.EnterPass.getText()).toString())
+                               .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                   @Override
+                                   public void onSuccess(AuthResult authResult) {
+                                       showToast("Login Successfully");
+                                   }
+                               }).addOnFailureListener(new OnFailureListener() {
+                                   @Override
+                                   public void onFailure(@NonNull Exception e) {
+                                       showToast(e.getMessage());
+                                   }
+                               });
+                   }
+               }
+           });
     }
 
-    private void GotoCrud() {
-        Intent ig=new Intent(HomePage.this,InsertData.class);
-        startActivity(ig);
+    private boolean isValidate() {
+        if(Objects.requireNonNull(binding.EnterEmail.getText()).toString().isEmpty()){
+            showToast("Please enter email");
+            return false;
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(binding.EnterEmail.getText().toString()).matches()){
+            showToast("Enter Valid Email");
+            return false;
+        } else if ((Objects.requireNonNull(binding.EnterPass.getText()).toString().isEmpty())) {
+            showToast("Enter Your Password");
+            return false;
+        }
+        return true;
+    }
+
+
+    private void showToast(String str) {
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 }
